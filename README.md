@@ -1,13 +1,15 @@
 # Brief Log of SSD processing
 ## Data Augmentation
 
-[2020-08-23] training time = 102 minutes, pretrained weight = ssd_model.h5, input = 2092 images, loss = 0.778, val_loss = 0.975
+[2020-08-23] training time = 60 minutes, pretrained weight = ep069-loss0.778-val_loss0.975.h5, input = 2092 images, loss = 0.635, val_loss = 0.867, batch = (8, 8)
+
+[2020-08-23] training time = 102 minutes, pretrained weight = ssd_model.h5, input = 2092 images, loss = 0.778, val_loss = 0.975, batch = (8, 16)
 
 ## Switch from Tensorflow Object Detection API to TF2 SSD
 
 [2020-08-21] Changed class labels from 5 to 1, tried to get higher accuracy. Accuarcy seemed increased, but was still very low(conf_thred=1e-3).
 
-[2020-08-18] Changed image size from 512 to 300, finally got rid of errors. Started to train ssd from scratch. Training succeed but got negligible accuarcy(conf_thred=3e-5).
+[2020-08-18] Changed image size from 512 to 300, finally got rid of errors. Started to train ssd from scratch. Training succeed but got poor accuarcy(conf_thred=3e-5).
 
 [2020-08-16] Got errors because of input dimension imcompatibility. Found https://github.com/bubbliiiing/ssd-tf2 .
 
