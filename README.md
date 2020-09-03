@@ -1,14 +1,64 @@
 # Brief Log of My SSD processing
 
+## Use PC as server for ssd inference and Raspberry Pi as client
+
+**[2020-09-03]**
+
+* In order to make the server and client communicate, I started to learn how to use socket in TCP/IP. With socket, I could send the result of ssd model inference(detected class and bounding box vertices) back to Raspberry, which is my socket client. 
+
+***
+
+**[2020-09-02]**
+
+* Implemented a gstreamer pipeline that can capture frames from RPi Camera and send them from RPi to my PC through udp. At first, I got 30fps with an extremely long  delay(15 seconds). 
+
+However, I found there were two main reasons that caused the long delay :
+
+1. The capturing fps on RPi is too high for ssd to inference. I used 40 fps for testing before and forgot to change. Now I use 24 fps for inference.
+
+2. The queue element in gstreamer pipeline delayed a lot. Don't know why I saw a guy on stackoverflow said that adding queue can shorten delay.
+
+***
+
+**[2020-09-01]**
+
+* The OpenCV's python library is built in my general anaconda (base) environment but my cuda and cudnn were installed in my anaconda (tf2.2-gpu) environment. Thus, I downloaded cuda and cudnn in my C:/ to use OpenCV and cuda at the same time. The reason why I didn't do this earlier is that all these cuda, cudnn, tensorflow version conflicts had killed me many many times when I started the project, and also, '''conda install cudatoolkit, cudnn''' in anaconda environment is so convinient.
+
+***
+
+**[2020-08-31]**
+
+* Installed Gstreamer for windows. Uninstalled opencv-python and build OpenCV on Windows because opencv-python was not built with gstreamer.
+
+* It's important to check whether you installed gst-libav or not. I couldn't use avdec_h264 because I didn't check it during installation.
+
+***
+
+## Try to use TensorRT to optimize ssd model
+
+**[2020-08-30]**
+
+* TensorRT doesn't support python API on winodws, so I used google colab, which is built in ubuntu, to install TensorRT on my google drive. The converted TensorRT model is not as convinient as Tensorflow model. After a lot tries, I gave up this solution.
+
+***
+
+**[2020-08-28]**
+
+* Used Jetson Nano to do the conversion of TensorRT. However, conversion cost a lot more memory than model inference. Jetson Nano killed the conversion process due to OOM even after I increased the swapfile to 8G. This made me learned that Jetson Nano has really few memory again.
+
+***
+
 ## Use cv2.VideoCapture() as ssd inference input
 
 **[2020-08-26]**
 
-* Used Jetson Nano to predict, got really poor fps (almost 1 frame every 5 seconds). Used gstreamer pipeline as source.
+* Used Jetson Nano to predict, got really poor fps of 1.8, also a 5 seconds delay. Used gstreamer pipeline as source.
 
-* Used my ASUS notebook, which has GTX GeForce 1060, to predict and get 1 frame every second. Used a webcam as source.
+* Used my ASUS notebook, which has GTX GeForce 1060, to predict and get 30 fps. Used a webcam as source.
 
 * Another error was that the input had to be a square image, otherwise there would be an error related to ssd input shape.
+
+***
 
 ## Change PIL to OpenCV
 
@@ -25,6 +75,8 @@ Some different points when it comes to converting PIL to OpenCV :
 2. draw.rectangle(receives left **top** coordinates) vs. cv2.rectangle(receives left **bottom** coordinates)
 
 3. draw.textsize vs. cv2.getTextSize
+
+***
 
 ## Data Augmentation (Training Succeeded)
 
