@@ -1,5 +1,14 @@
 # Brief Log of My SSD processing
 
+##
+
+Date       | training time | pretrained weight                | loss  | val-loss | lr before freeze | lr after freeze | batch    | epoch
+---------- | :------------ | :------------------------------- | :---: | :------: | ---------------- | --------------- | :------- | -----
+2020-09-22 | 30 minutes    | ep040-loss0.688-val_loss0.840.h5 | 0.642 | 0.811    |                  |                 | (16, 16) | (20, 40)
+2020-09-22 | 31 minutes    | ep036-loss0.818-val_loss0.967.h5 | 0.688 | 0.840    |                  |                 | (16, 16) | (20, 40)
+2020-09-22 |  minutes    | ep054-loss0.943-val_loss1.104.h5 | 0. | 0.    |               |                  | (16, 16) | (20, 40)
+2020-09-22 | 59 minutes    | ssd_model.h5                     | 0.943 | 1.104    | 1.5625e-05       | 1.5625e-06      | (16, 16) | (40, 80)
+
 ## Use PC as server for ssd inference and Raspberry Pi as client
 
 **[2020-09-03]**
