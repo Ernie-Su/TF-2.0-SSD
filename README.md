@@ -4,10 +4,21 @@
 
 Date       | training time | pretrained weight                | loss  | val-loss | lr before freeze | lr after freeze | batch    | epoch
 ---------- | :------------ | :------------------------------- | :---: | :------: | ---------------- | --------------- | :------- | -----
-2020-09-22 | 30 minutes    | ep040-loss0.688-val_loss0.840.h5 | 0.642 | 0.811    |                  |                 | (16, 16) | (20, 40)
-2020-09-22 | 31 minutes    | ep036-loss0.818-val_loss0.967.h5 | 0.688 | 0.840    |                  |                 | (16, 16) | (20, 40)
-2020-09-22 |  minutes    | ep054-loss0.943-val_loss1.104.h5 | 0. | 0.    |               |                  | (16, 16) | (20, 40)
-2020-09-22 | 59 minutes    | ssd_model.h5                     | 0.943 | 1.104    | 1.5625e-05       | 1.5625e-06      | (16, 16) | (40, 80)
+2020-09-22 | 30 minutes    | ep027-loss0.696-val_loss0.855.h5 | 0. | 0.    | 3.125e-05         | 6.125e-06        | (16, 16) | (20, 40)
+2020-09-22 | 30 minutes    | ep033-loss0.708-val_loss0.896.h5 | 0.696 | 0.855    | 6.25e-05         | 1.25e-05        | (16, 16) | (20, 40)
+2020-09-22 | 31 minutes    | ep035-loss0.821-val_loss0.958.h5 | 0.708 | 0.896    | 1.25e-04         | 2.5e-05         | (16, 16) | (20, 40)
+2020-09-22 | 37 minutes    | ep054-loss0.943-val_loss1.104.h5 | 0.821 | 0.958    | 2.5e-04          | 5e-05           | (16, 16) | (20, 40)
+2020-09-22 | 59 minutes    | ssd_model.h5                     | 0.943 | 1.104    | 5e-04            | 1e-04           | (16, 16) | (40, 80)
+
+## Get mAP, Split dataset, Fix wrong annotation
+
+**[2020-09-21]**
+
+* To make my model comparable, it's necessary to evaluate my model mAP. A higher mAP value indicates a better performance of a model. However, I didn't split my dataset into train and test, this made the mAP look far too ideal(99.95%) that even a beginner like me knew something was wrong.
+
+* While writing the train_test_split.py code, I accidently found that some of my class annotations for data augmentation might be wrong. The reason is that I forgot to change the class after a horizontal flip from right to left, and left to right.
+
+***
 
 ## Use PC as server for ssd inference and Raspberry Pi as client
 
